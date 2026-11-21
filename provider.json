@@ -6,5 +6,7 @@
   "display_name": "Tom05 flash Free",
   "endpoint": "http://127.0.0.1:8772/v1",
   "upstream": "http://127.0.0.1:8766/v1/chat/completions",
+  "context_length": 100000000,
+  "declared_only": true,
   "note": "Lokal, loopback-only. Tidak menyimpan kredensial."
 }
