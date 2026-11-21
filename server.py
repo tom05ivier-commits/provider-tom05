@@ -1,11 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-only
 # Copyright (C) 2026 Tomi vier
 # provider-tom05 — OpenAI-compatible provider wrapper.
-"""Lokal, loopback-only OpenAI-compatible endpoint for model tom05-flash-free.
-
-Upstream default: http://127.0.0.1:8766/v1/chat/completions
-No credentials are read, stored, or printed by this server.
-"""
 
 from __future__ import annotations
 
@@ -19,6 +14,7 @@ PORT = int(os.environ.get("TOM05_PROVIDER_PORT", "8772"))
 UPSTREAM = os.environ.get("TOM05_UPSTREAM", "http://127.0.0.1:8766/v1/chat/completions").rstrip("/")
 UPSTREAM_MODEL = os.environ.get("TOM05_UPSTREAM_MODEL", "hy4-flash-free")
 MODEL_ID = "tom05-flash-free"
+CTL = int(os.environ.get("TOM05_CTL", "100000000"))
 
 
 def _send(h: BaseHTTPRequestHandler, status: int, payload: dict[str, Any]) -> None:
@@ -43,7 +39,8 @@ class Handler(BaseHTTPRequestHandler):
         elif path in ("/v1/models", "/models"):
             _send(self, 200, {"object": "list", "data": [{
                 "id": MODEL_ID, "object": "model", "owned_by": "tom05",
-                "name": "Tom05 flash Free",
+                "name": "Tom05 flash Free", "context_length": CTL,
+                "declared_only": True,
             }]})
         else:
             _send(self, 404, {"error": "not found"})
