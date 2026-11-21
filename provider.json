@@ -1,0 +1,10 @@
+{
+  "id": "tom05",
+  "name": "Tom05",
+  "license": "AGPL-3.0-only",
+  "model": "tom05-flash-free",
+  "display_name": "Tom05 flash Free",
+  "endpoint": "http://127.0.0.1:8772/v1",
+  "upstream": "http://127.0.0.1:8766/v1/chat/completions",
+  "note": "Lokal, loopback-only. Tidak menyimpan kredensial."
+}
